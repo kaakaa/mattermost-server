@@ -770,6 +770,7 @@ export const Constants = {
         sql: {name: 'SQL', extensions: ['sql']},
         swift: {name: 'Swift', extensions: ['swift']},
         tex: {name: 'TeX', extensions: ['tex']},
+        text: {name: 'Text', extensions: ['txt']},
         vbnet: {name: 'VB.Net', extensions: ['vbnet', 'vb', 'bas']},
         vbscript: {name: 'VBScript', extensions: ['vbs']},
         verilog: {name: 'Verilog', extensions: ['v', 'veo']},
