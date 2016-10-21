@@ -90,6 +90,8 @@ func executeCommand(c *Context, w http.ResponseWriter, r *http.Request) {
 	props := model.MapFromJson(r.Body)
 	command := strings.TrimSpace(props["command"])
 	channelId := strings.TrimSpace(props["channelId"])
+	parentId := strings.TrimSpace(props["parentId"])
+	rootId := strings.TrimSpace(props["rootId"])
 
 	if len(command) <= 1 || strings.Index(command, "/") != 0 {
 		c.Err = model.NewLocAppError("executeCommand", "api.command.execute_command.start.app_error", nil, "")
@@ -110,7 +112,7 @@ func executeCommand(c *Context, w http.ResponseWriter, r *http.Request) {
 
 	if provider != nil {
 		response := provider.DoCommand(c, channelId, message)
-		handleResponse(c, w, response, channelId, provider.GetCommand(c), true)
+		handleResponse(c, w, response, channelId, parentId, rootId, provider.GetCommand(c), true)
 		return
 	} else {
 
@@ -199,7 +201,7 @@ func executeCommand(c *Context, w http.ResponseWriter, r *http.Request) {
 							if response == nil {
 								c.Err = model.NewLocAppError("command", "api.command.execute_command.failed_empty.app_error", map[string]interface{}{"Trigger": trigger}, "")
 							} else {
-								handleResponse(c, w, response, channelId, cmd, false)
+								handleResponse(c, w, response, channelId, parentId, rootId, cmd, false)
 							}
 						} else {
 							defer resp.Body.Close()
@@ -218,7 +220,7 @@ func executeCommand(c *Context, w http.ResponseWriter, r *http.Request) {
 	c.Err = model.NewLocAppError("command", "api.command.execute_command.not_found.app_error", map[string]interface{}{"Trigger": trigger}, "")
 }
 
-func handleResponse(c *Context, w http.ResponseWriter, response *model.CommandResponse, channelId string, cmd *model.Command, builtIn bool) {
+func handleResponse(c *Context, w http.ResponseWriter, response *model.CommandResponse, channelId, parentId, rootId string, cmd *model.Command, builtIn bool) {
 
 	post := &model.Post{}
 	post.ChannelId = channelId
@@ -246,6 +248,8 @@ func handleResponse(c *Context, w http.ResponseWriter, response *model.CommandRe
 	if response.ResponseType == model.COMMAND_RESPONSE_TYPE_IN_CHANNEL {
 		post.Message = response.Text
 		post.UserId = c.Session.UserId
+		post.RootId = rootId
+		post.ParentId = parentId
 		if _, err := CreatePost(c, post, true); err != nil {
 			c.Err = model.NewLocAppError("command", "api.command.execute_command.save.app_error", nil, "")
 		}

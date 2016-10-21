@@ -32,7 +32,7 @@ export function goToChannel(channel) {
     }
 }
 
-export function executeCommand(channelId, message, suggest, success, error) {
+export function executeCommand(channelId, message, parentId, rootId, suggest, success, error) {
     let msg = message;
 
     msg = msg.substring(0, msg.indexOf(' ')).toLowerCase() + msg.substring(msg.indexOf(' '), msg.length);
@@ -49,7 +49,7 @@ export function executeCommand(channelId, message, suggest, success, error) {
         }
     }
 
-    Client.executeCommand(channelId, msg, suggest, success, error);
+    Client.executeCommand(channelId, msg, parentId, rootId, suggest, success, error);
 }
 
 export function setChannelAsRead(channelIdParam) {

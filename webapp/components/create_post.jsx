@@ -127,6 +127,8 @@ export default class CreatePost extends React.Component {
             ChannelActions.executeCommand(
                 this.state.channelId,
                 post.message,
+                '',
+                '',
                 false,
                 (data) => {
                     this.setState({submitting: false});
@@ -343,6 +345,8 @@ export default class CreatePost extends React.Component {
             ChannelActions.executeCommand(
                 this.state.channelId,
                 '/shortcuts ',
+                '',
+                '',
                 false,
                 null,
                 (err) => {

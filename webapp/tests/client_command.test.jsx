@@ -41,6 +41,8 @@ describe('Client.Commands', function() {
             TestHelper.basicClient().executeCommand(
                 TestHelper.basicChannel().id,
                 '/shrug',
+                '',
+                '',
                 null,
                 function(data) {
                     assert.equal(data.response_type, 'in_channel');
