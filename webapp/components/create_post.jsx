@@ -106,6 +106,7 @@ export default class CreatePost extends React.Component {
         const post = {};
         post.file_ids = [];
         post.message = this.state.messageText;
+        post.channel_id = this.state.channelId;
 
         if (post.message.trim().length === 0 && this.state.fileInfos.length === 0) {
             return;
@@ -125,10 +126,7 @@ export default class CreatePost extends React.Component {
             this.setState({messageText: '', postError: null, fileInfos: []});
 
             ChannelActions.executeCommand(
-                this.state.channelId,
-                post.message,
-                '',
-                '',
+                post,
                 false,
                 (data) => {
                     this.setState({submitting: false});
@@ -154,7 +152,6 @@ export default class CreatePost extends React.Component {
     }
 
     sendMessage(post) {
-        post.channel_id = this.state.channelId;
         post.file_ids = this.state.fileInfos.map((info) => info.id);
 
         const time = Utils.getTimestamp();

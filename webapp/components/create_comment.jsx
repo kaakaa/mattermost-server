@@ -127,6 +127,9 @@ export default class CreateComment extends React.Component {
         const post = {};
         post.file_ids = [];
         post.message = this.state.messageText;
+        post.channel_id = this.props.channelId;
+        post.root_id = this.props.rootId;
+        post.parent_id = this.props.rootId;
 
         if (post.message.trim().length === 0 && this.state.fileInfos.length === 0) {
             return;
@@ -154,10 +157,7 @@ export default class CreateComment extends React.Component {
             this.setState({messageText: '', postError: null, fileInfos: []});
 
             ChannelActions.executeCommand(
-                this.props.channelId,
-                post.message,
-                this.props.parentId,
-                this.props.rootId,
+                post,
                 false,
                 (data) => {
                     this.setState({submitting: false});
@@ -185,9 +185,6 @@ export default class CreateComment extends React.Component {
     sendMessage(post) {
         const userId = UserStore.getCurrentId();
 
-        post.channel_id = this.props.channelId;
-        post.root_id = this.props.rootId;
-        post.parent_id = this.props.rootId;
         post.file_ids = this.state.fileInfos.map((info) => info.id);
         const time = Utils.getTimestamp();
         post.pending_post_id = `${userId}:${time}`;

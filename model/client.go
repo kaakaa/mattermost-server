@@ -6,7 +6,6 @@ package model
 import (
 	"bytes"
 	"fmt"
-	l4g "github.com/alecthomas/log4go"
 	"io"
 	"io/ioutil"
 	"mime/multipart"
@@ -15,6 +14,8 @@ import (
 	"strconv"
 	"strings"
 	"time"
+
+	l4g "github.com/alecthomas/log4go"
 )
 
 const (
@@ -804,11 +805,18 @@ func (c *Client) EmailToLDAP(m map[string]string) (*Result, *AppError) {
 }
 
 func (c *Client) Command(channelId string, command string, suggest bool) (*Result, *AppError) {
-	m := make(map[string]string)
-	m["command"] = command
-	m["channelId"] = channelId
-	m["suggest"] = strconv.FormatBool(suggest)
-	if r, err := c.DoApiPost(c.GetTeamRoute()+"/commands/execute", MapToJson(m)); err != nil {
+	/*
+		m := make(map[string]string)
+		m["command"] = command
+		m["channelId"] = channelId
+		m["suggest"] = strconv.FormatBool(suggest)
+	*/
+	p := &Post{
+		ChannelId: channelId,
+		Message:   command,
+	}
+	// if r, err := c.DoApiPost(c.GetTeamRoute()+"/commands/execute", MapToJson(m)); err != nil {
+	if r, err := c.DoApiPost(c.GetTeamRoute()+"/commands/execute", p.ToJson()); err != nil {
 		return nil, err
 	} else {
 		defer closeBody(r)
