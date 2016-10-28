@@ -42,7 +42,8 @@ export default class SidebarRight extends React.Component {
             expanded: false,
             fromSearch: false,
             currentUser: UserStore.getCurrentUser(),
-            useMilitaryTime: PreferenceStore.getBool(Constants.Preferences.CATEGORY_DISPLAY_SETTINGS, Constants.Preferences.USE_MILITARY_TIME, false)
+            useMilitaryTime: PreferenceStore.getBool(Constants.Preferences.CATEGORY_DISPLAY_SETTINGS, Constants.Preferences.USE_MILITARY_TIME, false),
+            previewsCollapsed: PreferenceStore.get(Constants.Preferences.CATEGORY_DISPLAY_SETTINGS, Constants.Preferences.COLLAPSE_DISPLAY, 'false')
         };
     }
 
@@ -107,13 +108,21 @@ export default class SidebarRight extends React.Component {
         this.doStrangeThings();
     }
 
-    onPreferenceChange() {
+    onPreferenceChange(category) {
+        // Bit of a hack to force render when this setting is updated
+        // regardless of change
+        let previewSuffix = '';
+        if (category === Constants.Preferences.CATEGORY_DISPLAY_SETTINGS) {
+            previewSuffix = '_' + Utils.generateId();
+        }
+
         if (this.state.isFlaggedPosts) {
             getFlaggedPosts();
         }
 
         this.setState({
-            useMilitaryTime: PreferenceStore.getBool(Constants.Preferences.CATEGORY_DISPLAY_SETTINGS, Constants.Preferences.USE_MILITARY_TIME, false)
+            useMilitaryTime: PreferenceStore.getBool(Constants.Preferences.CATEGORY_DISPLAY_SETTINGS, Constants.Preferences.USE_MILITARY_TIME, false),
+            previewsCollapsed: PreferenceStore.get(Constants.Preferences.CATEGORY_DISPLAY_SETTINGS, Constants.Preferences.COLLAPSE_DISPLAY, 'false') + previewSuffix
         });
     }
 
@@ -186,6 +195,7 @@ export default class SidebarRight extends React.Component {
                     useMilitaryTime={this.state.useMilitaryTime}
                     toggleSize={this.toggleSize}
                     shrink={this.onShrink}
+                    previewCollapsed={this.state.previewsCollapsed}
                 />
             );
         }

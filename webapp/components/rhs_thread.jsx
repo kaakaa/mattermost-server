@@ -142,6 +142,10 @@ export default class RhsThread extends React.Component {
             return true;
         }
 
+        if (nextState.previewCollapsed !== this.props.previewCollapsed) {
+            return true;
+        }
+
         return false;
     }
 
@@ -300,6 +304,7 @@ export default class RhsThread extends React.Component {
                                 useMilitaryTime={this.props.useMilitaryTime}
                                 isFlagged={isRootFlagged}
                                 status={rootStatus}
+                                previewCollapsed={this.props.previewCollapsed}
                             />
                             <div className='post-right-comments-container'>
                                 {postsArray.map((comPost) => {
@@ -362,5 +367,6 @@ RhsThread.propTypes = {
     currentUser: React.PropTypes.object.isRequired,
     useMilitaryTime: React.PropTypes.bool.isRequired,
     toggleSize: React.PropTypes.function,
-    shrink: React.PropTypes.function
+    shrink: React.PropTypes.function,
+    previewCollapsed: React.PropTypes.string
 };
