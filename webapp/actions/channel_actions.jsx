@@ -32,24 +32,24 @@ export function goToChannel(channel) {
     }
 }
 
-export function executeCommand(channelId, message, suggest, success, error) {
-    let msg = message;
+export function executeCommand(post, success, error) {
+    let msg = post.message;
 
     msg = msg.substring(0, msg.indexOf(' ')).toLowerCase() + msg.substring(msg.indexOf(' '), msg.length);
 
-    if (message.indexOf('/shortcuts') !== -1) {
+    if (post.message.indexOf('/shortcuts') !== -1) {
         if (UserAgent.isMobile()) {
             const err = {message: Utils.localizeMessage('create_post.shortcutsNotSupported', 'Keyboard shortcuts are not supported on your device')};
             error(err);
             return;
         } else if (Utils.isMac()) {
             msg += ' mac';
-        } else if (message.indexOf('mac') !== -1) {
+        } else if (post.message.indexOf('mac') !== -1) {
             msg = '/shortcuts';
         }
     }
-
-    Client.executeCommand(channelId, msg, suggest, success, error);
+    post.message = msg;
+    Client.executeCommand(post, success, error);
 }
 
 export function setChannelAsRead(channelIdParam) {
