@@ -149,7 +149,7 @@ export default class CreateComment extends React.Component {
         this.setState({submitting: true, serverError: null});
 
         if (post.message.indexOf('/') === 0) {
-            PostStore.storeDraft(this.props.channelId, null);
+            PostStore.storeCommentDraft(this.props.rootId, null);
             this.setState({messageText: '', postError: null, fileInfos: []});
 
             post.channel_id = this.props.channelId;

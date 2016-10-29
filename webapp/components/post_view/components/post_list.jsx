@@ -273,7 +273,7 @@ export default class PostList extends React.Component {
             }
 
             for (const postId in posts) {
-                if (posts[postId].root_id === commentRootId) {
+                if (posts[postId].root_id === commentRootId && !PostUtils.isSystemMessage(posts[postId])) {
                     commentCount += 1;
                     if (posts[postId].user_id === userId && (lastCommentOnThreadTime === Number.MAX_SAFE_INTEGER || lastCommentOnThreadTime < posts[postId].create_at)) {
                         lastCommentOnThreadTime = posts[postId].create_at;
