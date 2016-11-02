@@ -301,6 +301,11 @@ export default class RhsComment extends React.Component {
             );
         }
 
+        let systemMessageClass = '';
+        if (isSystemMessage) {
+            systemMessageClass = 'post--system';
+        }
+
         let profilePic = (
             <ProfilePicture
                 src={PostUtils.getProfilePicSrcForPost(post, timestamp)}
@@ -419,7 +424,7 @@ export default class RhsComment extends React.Component {
         }
 
         return (
-            <div className={'post post--thread ' + currentUserCss + ' ' + compactClass}>
+            <div className={'post post--thread ' + currentUserCss + ' ' + compactClass + ' ' + systemMessageClass}>
                 <div className='post__content'>
                     {profilePicContainer}
                     <div>
