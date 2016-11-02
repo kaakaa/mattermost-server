@@ -241,6 +241,7 @@ export default class RhsComment extends React.Component {
     render() {
         const post = this.props.post;
         const flagIcon = Constants.FLAG_ICON_SVG;
+        const mattermostLogo = Constants.MATTERMOST_ICON_SVG;
         const isSystemMessage = PostUtils.isSystemMessage(post);
 
         var currentUserCss = '';
@@ -309,6 +310,15 @@ export default class RhsComment extends React.Component {
                 user={this.props.user}
             />
         );
+
+        if (isSystemMessage) {
+            profilePic = (
+                <span
+                    className='icon'
+                    dangerouslySetInnerHTML={{__html: mattermostLogo}}
+                />
+            );
+        }
 
         let compactClass = '';
         if (this.props.compactDisplay) {
