@@ -91,6 +91,12 @@ export default class RhsThread extends React.Component {
 
         window.removeEventListener('resize', this.handleResize);
 
+        for (const k in this.state.postsArray) {
+            if (this.state.postsArray.hasOwnProperty(k) && Utils.isPostEphemeral(this.state.postsArray[k])) {
+                PostStore.removePost(this.state.postsArray[k]);
+            }
+        }
+
         this.mounted = false;
     }
 

@@ -241,6 +241,7 @@ export default class RhsComment extends React.Component {
     render() {
         const post = this.props.post;
         const flagIcon = Constants.FLAG_ICON_SVG;
+        const mattermostLogo = Constants.MATTERMOST_ICON_SVG;
         const isSystemMessage = PostUtils.isSystemMessage(post);
 
         var currentUserCss = '';
@@ -300,6 +301,11 @@ export default class RhsComment extends React.Component {
             );
         }
 
+        let systemMessageClass = '';
+        if (isSystemMessage) {
+            systemMessageClass = 'post--system';
+        }
+
         let profilePic = (
             <ProfilePicture
                 src={PostUtils.getProfilePicSrcForPost(post, timestamp)}
@@ -309,6 +315,15 @@ export default class RhsComment extends React.Component {
                 user={this.props.user}
             />
         );
+
+        if (isSystemMessage) {
+            profilePic = (
+                <span
+                    className='icon'
+                    dangerouslySetInnerHTML={{__html: mattermostLogo}}
+                />
+            );
+        }
 
         let compactClass = '';
         if (this.props.compactDisplay) {
@@ -409,7 +424,7 @@ export default class RhsComment extends React.Component {
         }
 
         return (
-            <div className={'post post--thread ' + currentUserCss + ' ' + compactClass}>
+            <div className={'post post--thread ' + currentUserCss + ' ' + compactClass + ' ' + systemMessageClass}>
                 <div className='post__content'>
                     {profilePicContainer}
                     <div>
