@@ -296,7 +296,19 @@ export default class SignupController extends React.Component {
         if (this.state.noOpenServerError || this.state.usedBefore) {
             signupControls = null;
         } else {
-            signupControls = this.renderSignupControls();
+            signupControls = (
+                <div>
+                  <div className='margin--extra'>
+                    <h5><strong>
+                      <FormattedMessage
+                        id='signup.title'
+                        defaultMessage='Create an account with:'
+                      />
+                    </strong></h5>
+                  </div>
+                  {this.renderSignupControls()}
+                </div>
+            );
         }
 
         return (
@@ -323,14 +335,6 @@ export default class SignupController extends React.Component {
                                     id='web.root.signup_info'
                                 />
                             </h4>
-                            <div className='margin--extra'>
-                                <h5><strong>
-                                    <FormattedMessage
-                                        id='signup.title'
-                                        defaultMessage='Create an account with:'
-                                    />
-                                </strong></h5>
-                            </div>
                             {signupControls}
                             {serverError}
                         </div>
