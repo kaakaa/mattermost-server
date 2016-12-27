@@ -1023,7 +1023,7 @@ func newSessionUpdateToken(appName string, accessData *model.AccessData, user *m
 	accessData.ExpiresAt = session.ExpiresAt
 	if result := <-Srv.Store.OAuth().UpdateAccessData(accessData); result.Err != nil {
 		l4g.Error(result.Err)
-		return nil, model.NewLocAppError("getAccessToken", "web.get_access_token.internal_saving.app_error", nil, "")
+		return nil, model.NewLocAppError("getAccessToken", "api.oauth.get_access_token.internal_updating.app_error", nil, "")
 	}
 	accessRsp := &model.AccessResponse{
 		AccessToken: session.Token,

@@ -833,7 +833,7 @@ func sendNotifications(c *Context, post *model.Post, team *model.Team, channel *
 
 		var infos []*model.FileInfo
 		if result := <-fchan; result.Err != nil {
-			l4g.Warn(utils.T("api.post.send_notifications.files.error"), post.Id, result.Err)
+			l4g.Warn(utils.T("api.post.send_notifications_and_forget.files.error"), post.Id, result.Err)
 		} else {
 			infos = result.Data.([]*model.FileInfo)
 		}

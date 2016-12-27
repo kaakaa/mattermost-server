@@ -60,7 +60,7 @@ func (s SqlReactionStore) Save(reaction *model.Reaction) StoreChannel {
 			} else {
 				if err := transaction.Commit(); err != nil {
 					// don't need to rollback here since the transaction is already closed
-					result.Err = model.NewLocAppError("SqlPreferenceStore.Save", "store.sql_preference.save.commit.app_error", nil, err.Error())
+					result.Err = model.NewLocAppError("SqlPreferenceStore.Save", "store.sql_reaction.save.commit.app_error", nil, err.Error())
 				}
 			}
 

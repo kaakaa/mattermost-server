@@ -232,7 +232,7 @@ func (us SqlUserStore) UpdateUpdateAt(userId string) StoreChannel {
 		curTime := model.GetMillis()
 
 		if _, err := us.GetMaster().Exec("UPDATE Users SET UpdateAt = :Time WHERE Id = :UserId", map[string]interface{}{"Time": curTime, "UserId": userId}); err != nil {
-			result.Err = model.NewLocAppError("SqlUserStore.UpdateUpdateAt", "store.sql_user.update_update.app_error", nil, "user_id="+userId)
+			result.Err = model.NewLocAppError("SqlUserStore.UpdateUpdateAt", "store.sql_user.update_update_at.app_error", nil, "user_id="+userId)
 		} else {
 			result.Data = userId
 		}

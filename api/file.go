@@ -609,7 +609,7 @@ func migrateFilenamesToFileInfos(post *model.Post) []*model.FileInfo {
 	// Create FileInfo objects for this post
 	infos := make([]*model.FileInfo, 0, len(filenames))
 	if teamId == "" {
-		l4g.Error(utils.T("api.file.migrate_filenames_to_file_infos.team_id.error"), post.Id, filenames)
+		l4g.Error(utils.T("api.file.migrate_filenames_to_file_infos.team_id.app_error"), post.Id, filenames)
 	} else {
 		for _, filename := range filenames {
 			info := getInfoForFilename(post, teamId, filename)
@@ -631,7 +631,7 @@ func migrateFilenamesToFileInfos(post *model.Post) []*model.FileInfo {
 	} else if newPost := result.Data.(*model.PostList).Posts[post.Id]; len(newPost.Filenames) != len(post.Filenames) {
 		// Another thread has already created FileInfos for this post, so just return those
 		if result := <-Srv.Store.FileInfo().GetForPost(post.Id); result.Err != nil {
-			l4g.Error(utils.T("api.file.migrate_filenames_to_file_infos.get_post_file_infos_again.app_error"), post.Id, result.Err)
+			l4g.Error(utils.T("api.file.migrate_filenames_to_file_infos.get_file_infos_again.app_error"), post.Id, result.Err)
 			return []*model.FileInfo{}
 		} else {
 			l4g.Debug(utils.T("api.file.migrate_filenames_to_file_infos.not_migrating_post.debug"), post.Id)

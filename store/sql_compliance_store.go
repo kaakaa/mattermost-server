@@ -219,7 +219,7 @@ func (s SqlComplianceStore) ComplianceExport(job *model.Compliance) StoreChannel
 		var cposts []*model.CompliancePost
 
 		if _, err := s.GetReplica().Select(&cposts, query, props); err != nil {
-			result.Err = model.NewLocAppError("SqlPostStore.ComplianceExport", "store.sql_post.compliance_export.app_error", nil, err.Error())
+			result.Err = model.NewLocAppError("SqlPostStore.ComplianceExport", "store.sql_compliance.export.app_error", nil, err.Error())
 		} else {
 			result.Data = cposts
 		}
