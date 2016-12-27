@@ -3076,18 +3076,6 @@
     "translation": "Unable to update existing SAML user. Allowing login anyway. err=%v"
   },
   {
-    "id": "error.generic.link_message",
-    "translation": "Back to Mattermost"
-  },
-  {
-    "id": "error.generic.message",
-    "translation": "An error has occurred."
-  },
-  {
-    "id": "error.generic.title",
-    "translation": "Error"
-  },
-  {
     "id": "error.not_found.link_message",
     "translation": "Back to Mattermost"
   },
