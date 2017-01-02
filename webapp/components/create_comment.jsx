@@ -163,8 +163,26 @@ export default class CreateComment extends React.Component {
             args,
             (data) => {
                 this.setState({submitting: false});
+
+                if (message.trim() === '/logout') {
+                    GlobalActions.clientLogout(data.goto_location);
+                    return;
+                }
+
                 if (data.goto_location && data.goto_location.length > 0) {
-                    browserHistory.push(data.goto_location);
+                    if (data.goto_location.indexOf('/') == 0) {
+                        browserHistory.push(data.goto_location);
+                        return;
+                    }
+                    
+                    const win = window.open(data.goto_location);
+                    if (win === 'undefined') {
+                        this.setState({
+                            serverError: Utils.localizeMessage("create_comment.goto_location.error", "Cannot open a new tab. Please check if goto_location url is valid, or if turning off pop-up blocker in your browser settings."),
+                        });
+                    } else {
+                        win.focus();
+                    }
                 }
             },
             (err) => {
