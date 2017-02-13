@@ -56,6 +56,10 @@
     "translation": "New format for the client license is not supported yet. Please specify format=old in the query string."
   },
   {
+    "id": "api.admin.add_certificate.array.app_error",
+    "translation": "Empty array under 'certificate' in request"
+  },
+  {
     "id": "api.admin.add_certificate.no_file.app_error",
     "translation": "No file under 'certificate' in request"
   },
@@ -98,6 +102,10 @@
   {
     "id": "api.admin.saml.metadata.app_error",
     "translation": "An error occurred while building Service Provider Metadata"
+  },
+  {
+    "id": "api.admin.saml.not_available.app_error",
+    "translation": "SAML is not configured or supported on this server"
   },
   {
     "id": "api.admin.test_email.body",
@@ -396,7 +404,7 @@
     "translation": "Tried to perform an invalid update of the default channel {{.Channel}}"
   },
   {
-    "id": "api.channel.update_last_viewed_at.get_unread_count_for_channel.errord",
+    "id": "api.channel.update_last_viewed_at.get_unread_count_for_channel.error",
     "translation": "Unable to get the unread count for user_id=%v and channel_id=%v, err=%v"
   },
   {
@@ -966,6 +974,10 @@
     "translation": "Unable to create emoji. Another emoji with the same name already exists."
   },
   {
+    "id": "api.emoji.create.other_user.app_error",
+    "translation": "Unable to create emoji. "
+  },
+  {
     "id": "api.emoji.create.parse.app_error",
     "translation": "Unable to create emoji. Could not understand request."
   },
@@ -1026,6 +1038,10 @@
     "translation": "Unable to create emoji. An error occurred when trying to encode the GIF image."
   },
   {
+    "id": "api.emoji.upload.open.app_error",
+    "translation": "Unable to create emoji. An error occurred when trying to open the image."
+  },
+  {
     "id": "api.file.get_file.public_disabled.app_error",
     "translation": "Public links have been disabled by the system administrator"
   },
@@ -1042,16 +1058,16 @@
     "translation": "File doesn't have a thumbnail image"
   },
   {
-    "id": "api.file.get_info_for_request.no_post.app_error",
+    "id": "api.file.get_file_info_for_request.no_post.app_error",
     "translation": "Unable to get info for file. File must be attached to a post that can be read by the current user."
   },
   {
-    "id": "api.file.get_info_for_request.storage.app_error",
+    "id": "api.file.get_file_info_for_request.storage.app_error",
     "translation": "Unable to get info for file. Image storage is not configured."
   },
   {
-    "id": "api.file.get_public_file_old.storage.app_error",
-    "translation": "Unable to get file. Image storage is not configured."
+    "id": "api.file.get_public_file_old.no_post.app_error",
+    "translation": "Unable to get file. File must be attached to a post that can be read by the current user."
   },
   {
     "id": "api.file.get_public_file_old.storage.app_error",
@@ -1094,7 +1110,7 @@
     "translation": "Unable to get channel when migrating post to use FileInfos, post_id=%v, channel_id=%v, err=%v"
   },
   {
-    "id": "api.file.migrate_filenames_to_file_infos.file_not_found.warn",
+    "id": "api.file.migrate_filenames_to_file_infos.file_not_found.app_error",
     "translation": "Unable to find file when migrating post to use FileInfos, post_id=%v, filename=%v, path=%v, err=%v"
   },
   {
@@ -1102,7 +1118,7 @@
     "translation": "Unable to get FileInfos for post after migration, post_id=%v, err=%v"
   },
   {
-    "id": "api.file.migrate_filenames_to_file_infos.get_post_again.warn",
+    "id": "api.file.migrate_filenames_to_file_infos.get_post_again.app_error",
     "translation": "Unable to get post when migrating to use FileInfos, post_id=%v, err=%v"
   },
   {
@@ -1126,11 +1142,11 @@
     "translation": "Post already migrated to use FileInfos, post_id=%v, err=%v"
   },
   {
-    "id": "api.file.migrate_filenames_to_file_infos.save_file_info.warn",
+    "id": "api.file.migrate_filenames_to_file_infos.save_file_info.app_error",
     "translation": "Unable to save post when migrating post to use FileInfos, post_id=%v, file_id=%v, path=%v, err=%v"
   },
   {
-    "id": "api.file.migrate_filenames_to_file_infos.save_post.warn",
+    "id": "api.file.migrate_filenames_to_file_infos.save_post.app_error",
     "translation": "Unable to save file info when migrating post to use FileInfos, post_id=%v, file_id=%v, filename=%v, err=%v"
   },
   {
@@ -1192,6 +1208,10 @@
   {
     "id": "api.file.upload_file.bad_parse.app_error",
     "translation": "Unable to upload file. Header cannot be parsed."
+  },
+  {
+    "id": "api.file.read_file.s3.app_error",
+    "translation": "Encountered an error reading from S3"
   },
   {
     "id": "api.file.upload_file.large_image.app_error",
@@ -1688,6 +1708,10 @@
     "translation": "Failed to delete reaction because channel ID does not match post ID in the URL"
   },
   {
+    "id": "api.reaction.delete_reaction.user_id.app_error",
+    "translation": "Failed to delete reaction because context user_id did not match props user_id"
+  },
+  {
     "id": "api.reaction.init.debug",
     "translation": "Initializing reactions api routes"
   },
@@ -1698,6 +1722,10 @@
   {
     "id": "api.reaction.save_reaction.mismatched_channel_id.app_error",
     "translation": "Failed to save reaction because channel ID does not match post ID in the URL"
+  },
+  {
+    "id": "api.reaction.save_reaction.user_id.app_error",
+    "translation": "Failed to save reaction because context user_id did not match props user_id"
   },
   {
     "id": "api.reaction.send_reaction_event.post.app_error",
@@ -2606,6 +2634,10 @@
   {
     "id": "api.user.send_email_change_verify_email_and_forget.error",
     "translation": "Failed to send email change verification email successfully"
+  },
+  {
+    "id": "api.user.send_mfa_change_email.error",
+    "translation": "Failed to send MFA change email"
   },
   {
     "id": "api.user.send_password_change_email_and_forget.error",
@@ -5120,6 +5152,10 @@
     "translation": "We couldn't get the post"
   },
   {
+    "id": "store.sql_post.get_flagged_posts.app_error",
+    "translation": "We couldn't get flagged posts for the user"
+  },
+  {
     "id": "store.sql_post.get_parents_posts.app_error",
     "translation": "We couldn't get the parent post for the channel"
   },
@@ -5256,7 +5292,7 @@
     "translation": "Unable to commit transaction while deleting reaction"
   },
   {
-    "id": "store.sql_reaction.delete.save.app_error",
+    "id": "store.sql_reaction.delete.app_error",
     "translation": "Unable to delete reaction"
   },
   {
@@ -5284,7 +5320,7 @@
     "translation": "Unable to commit transaction while saving reaction"
   },
   {
-    "id": "store.sql_reaction.save.save.app_error",
+    "id": "store.sql_reaction.save.app_error",
     "translation": "Unable to save reaction"
   },
   {
@@ -5378,6 +5414,10 @@
   {
     "id": "store.sql_status.update.app_error",
     "translation": "Encountered an error updating the status"
+  },
+  {
+    "id": "store.sql_status.update_last_activity.app_error",
+    "translation": "We couldn't update the last_activity_at"
   },
   {
     "id": "store.sql_system.get.app_error",
@@ -5624,6 +5664,10 @@
     "translation": "An account with that username already exists. Please contact your Administrator."
   },
   {
+    "id": "store.sql_user.search.app_error",
+    "translation": "We encountered an error while searching for users"
+  },
+  {
     "id": "store.sql_user.update.app_error",
     "translation": "We couldn't update the account"
   },
@@ -5664,16 +5708,8 @@
     "translation": "We couldn't update the failed_attempts"
   },
   {
-    "id": "store.sql_user.update_last_activity.app_error",
-    "translation": "We couldn't update the last_activity_at"
-  },
-  {
     "id": "store.sql_user.update_last_picture_update.app_error",
-    "translation": "We couldn't update the update_at"
-  },
-  {
-    "id": "store.sql_user.update_last_ping.app_error",
-    "translation": "We couldn't update the last_ping_at"
+    "translation": "We couldn't update the last_picture_update"
   },
   {
     "id": "store.sql_user.update_mfa_active.app_error",
@@ -5686,6 +5722,10 @@
   {
     "id": "store.sql_user.update_password.app_error",
     "translation": "We couldn't update the user password"
+  },
+  {
+    "id": "store.sql_user.update_update.app_error",
+    "translation": "We couldn't update the update_at"
   },
   {
     "id": "store.sql_user.verify_email.app_error",

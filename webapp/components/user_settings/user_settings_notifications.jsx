@@ -345,7 +345,7 @@ export default class NotificationsTab extends React.Component {
                     <div key='userNotificationLevelOption'>
                         <label>
                             <FormattedMessage
-                                id='user.settings.push_notification.send'
+                                id='user.settings.push_notifications.send'
                                 defaultMessage='Send mobile push notifications'
                             />
                         </label>

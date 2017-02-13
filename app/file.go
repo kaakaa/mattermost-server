@@ -213,7 +213,7 @@ func GetInfoForFilename(post *model.Post, teamId string, filename string) *model
 	// Open the file and populate the fields of the FileInfo
 	var info *model.FileInfo
 	if data, err := ReadFile(path); err != nil {
-		l4g.Error(utils.T("api.file.migrate_filenames_to_file_infos.file_not_found.error"), post.Id, filename, path, err)
+		l4g.Error(utils.T("api.file.migrate_filenames_to_file_infos.file_not_found.app_error"), post.Id, filename, path, err)
 		return nil
 	} else {
 		var err *model.AppError
@@ -298,7 +298,7 @@ func MigrateFilenamesToFileInfos(post *model.Post) []*model.FileInfo {
 	// Create FileInfo objects for this post
 	infos := make([]*model.FileInfo, 0, len(filenames))
 	if teamId == "" {
-		l4g.Error(utils.T("api.file.migrate_filenames_to_file_infos.team_id.error"), post.Id, filenames)
+		l4g.Error(utils.T("api.file.migrate_filenames_to_file_infos.team_id.app_error"), post.Id, filenames)
 	} else {
 		for _, filename := range filenames {
 			info := GetInfoForFilename(post, teamId, filename)
