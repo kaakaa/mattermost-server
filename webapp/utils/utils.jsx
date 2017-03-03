@@ -410,6 +410,10 @@ export function getFileType(extin) {
         return 'patch';
     }
 
+    if (Constants.SVG_TYPES.indexOf(ext) > -1) {
+        return 'svg';
+    }
+
     return 'other';
 }
 
@@ -433,7 +437,7 @@ export function getIconClassName(fileTypeIn) {
         return Constants.ICON_NAME_FROM_TYPE[fileType];
     }
 
-    return 'glyphicon-file';
+    return 'generic';
 }
 
 export function splitFileLocation(fileLocation) {
