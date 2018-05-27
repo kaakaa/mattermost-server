@@ -2555,6 +2555,10 @@
     "translation": "Sent by "
   },
   {
+    "id": "api.templates.email_warning",
+    "translation": "If this change was not initiated by you, please contact your system administrator."
+  },
+  {
     "id": "api.templates.find_teams_body.found",
     "translation": "Your request to find teams associated with your email found the following:"
   },
@@ -2592,7 +2596,7 @@
   },
   {
     "id": "api.templates.mfa_activated_body.info",
-    "translation": "Multi-factor authentication has been added to your account on {{ .SiteURL }}.<br>If this change wasn't initiated by you, please contact your system administrator."
+    "translation": "Multi-factor authentication has been added to your account on {{ .SiteURL }}."
   },
   {
     "id": "api.templates.mfa_activated_body.title",
@@ -2604,7 +2608,7 @@
   },
   {
     "id": "api.templates.mfa_deactivated_body.info",
-    "translation": "Multi-factor authentication has been removed from your account on {{ .SiteURL }}.<br>If this change wasn't initiated by you, please contact your system administrator."
+    "translation": "Multi-factor authentication has been removed from your account on {{ .SiteURL }}."
   },
   {
     "id": "api.templates.mfa_deactivated_body.title",
