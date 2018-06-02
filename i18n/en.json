@@ -1855,6 +1855,25 @@
     "translation": "[{{ .SiteName }}] Your sign-in method has been updated"
   },
   {
+<<<<<<< HEAD
+=======
+    "id": "api.templates.signup_team_body.button",
+    "translation": "Set up your team"
+  },
+  {
+    "id": "api.templates.signup_team_body.title",
+    "translation": "Thanks for creating a team!"
+  },
+  {
+    "id": "api.templates.signup_team_subject",
+    "translation": "{{ .SiteName }} Team Setup"
+  },
+  {
+    "id": "api.templates.upgrade_30_subject.info",
+    "translation": "[MATTERMOST] Changes to your account for Mattermost 3.0 Upgrade"
+  },
+  {
+>>>>>>> 4aa63e7dd... Remove unused messages
     "id": "api.templates.user_access_token_body.info",
     "translation": "A personal access token was added to your account on {{ .SiteURL }}. They can be used to access {{.SiteName}} with your account."
   },
