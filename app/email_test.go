@@ -174,6 +174,45 @@ func TestSendPasswordChangeEmail(t *testing.T) {
 	}
 }
 
+func TestSendUserAccessTokenAddedEmail(t *testing.T) {
+	th := Setup().InitBasic()
+	defer th.TearDown()
+
+	var email = "test@example.com"
+	var locale = ""
+	var siteURL = "site_url"
+
+	//Delete all the messages before check the sample email
+	utils.DeleteMailBox(email)
+
+	th.App.SendUserAccessTokenAddedEmail(email, locale, siteURL)
+
+	var resultsMailbox utils.JSONMessageHeaderInbucket
+	err := utils.RetryInbucket(5, func() error {
+		var err error
+		resultsMailbox, err = utils.GetMailBox(email)
+		return err
+	})
+	if err != nil {
+		t.Log(err)
+		t.Fatal("No email was received, maybe due load on the server. Disabling this verification")
+	}
+	if err == nil && len(resultsMailbox) > 0 {
+		if !strings.ContainsAny(resultsMailbox[0].To[0], email) {
+			t.Fatal("Wrong To recipient")
+		} else {
+			if resultsEmail, err := utils.GetMessageFromMailbox(email, resultsMailbox[0].ID); err == nil {
+				b, err := ioutil.ReadFile("../tests/test-email-userAccessTokenAddedEmail.html")
+				require.NoError(t, err)
+				expected := strings.Split(string(b), "\n")			
+				for i, a := range strings.Split(resultsEmail.Body.HTML, "\r\n",){
+					assert.Equal(t, expected[i], a, fmt.Sprintf("Line %d is not match", i + 1))
+				}
+			}
+		}
+	}
+}
+
 func TestSendPasswordResetEmail(t *testing.T) {
 	th := Setup().InitBasic()
 	defer th.TearDown()
