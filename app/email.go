@@ -268,12 +268,15 @@ func (a *App) SendInviteEmails(team *model.Team, senderName string, invites []st
 			bodyPage := a.NewEmailTemplate("invite_body", model.DEFAULT_LOCALE)
 			bodyPage.Props["SiteURL"] = siteURL
 			bodyPage.Props["Title"] = utils.T("api.templates.invite_body.title")
-			bodyPage.Html["Info"] = utils.TranslateAsHtml(utils.T, "api.templates.invite_body.info",
-				map[string]interface{}{"SenderStatus": senderRole, "SenderName": senderName, "TeamDisplayName": team.DisplayName})
+
+			taggedSenderName := fmt.Sprintf("<strong>%s</strong>", senderName)
+			taggedTeamDisplayName := fmt.Sprintf("<strong>%s</strong>", team.DisplayName)
+			bodyPage.Html["Info"] = utils.T("api.templates.invite_body.info",
+				map[string]interface{}{"SenderStatus": senderRole, "SenderName": taggedSenderName, "TeamDisplayName": taggedTeamDisplayName})
 			bodyPage.Props["Info"] = map[string]interface{}{}
 			bodyPage.Props["Button"] = utils.T("api.templates.invite_body.button")
-			bodyPage.Html["ExtraInfo"] = utils.TranslateAsHtml(utils.T, "api.templates.invite_body.extra_info",
-				map[string]interface{}{"TeamDisplayName": team.DisplayName, "TeamURL": siteURL + "/" + team.Name})
+			bodyPage.Html["ExtraInfo"] = utils.T("api.templates.invite_body.extra_info",
+				map[string]interface{}{"TeamDisplayName": taggedTeamDisplayName, "TeamURL": siteURL + "/" + team.Name})
 
 			token := model.NewToken(
 				TOKEN_TYPE_TEAM_INVITATION,
