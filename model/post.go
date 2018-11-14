@@ -141,6 +141,7 @@ type PostAction struct {
 	Name        string                 `json:"name"`
 	Type        string                 `json:"type"`
 	DataSource  string                 `json:"data_source"`
+	Props       StringInterface        `json:"props"`
 	Options     []*PostActionOptions   `json:"options"`
 	Integration *PostActionIntegration `json:"integration,omitempty"`
 }
